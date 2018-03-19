@@ -8,11 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
+import services.UtilService;
+
+@Singleton
 public class MainServlet extends HttpServlet {
     /**
      * 
      */
     private static final long serialVersionUID = 1L;
+    
+    @Inject
+    private UtilService utilService;
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -21,7 +30,7 @@ public class MainServlet extends HttpServlet {
         // Get the printwriter object from response to write the required json object to the output stream
         PrintWriter out = response.getWriter();
         // Assuming your json object is *jsonObject*, perform the following, it will return your json object
-        out.print(res + "A");
+        out.print(utilService.appendGuice(res));
         out.flush();
     }
 }
