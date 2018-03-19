@@ -11,12 +11,14 @@ public class DBConnectionService {
 	private Connection conn = null;
 
 	private Connection getConnection() {
+	    
 		if (conn == null) {
 			try {
+			    Class.forName("org.postgresql.Driver");
 				this.conn = DriverManager.getConnection(
-						"postgres://K231CHL2mVF0yYum:l1yswwHrudHbMOo8@10.11.241.22:49971/uNzE4kBu9otGp4QJ",
+						"jdbc:postgresql://localhost:49971/uNzE4kBu9otGp4QJ",
 						"K231CHL2mVF0yYum", "l1yswwHrudHbMOo8");
-			} catch (SQLException e) {
+			} catch (SQLException | ClassNotFoundException e) {
 				System.out.println("Error connection to db " + e);
 			}
 		}

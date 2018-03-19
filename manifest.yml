@@ -5,3 +5,4 @@ applications:
   instances: 1
   host: hackaubg-test
   path: target/hackatonkm.war
+  buildpack: sap_java_buildpack
