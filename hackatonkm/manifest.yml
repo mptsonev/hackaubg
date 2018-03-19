@@ -1,0 +1,7 @@
+---
+applications:
+- name: hackaton-war
+  memory: 1GB
+  instances: 1
+  host: hackaubg-test
+  path: target/hackatonkm.war
