@@ -8,9 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import hackatonkm.response.GeneralResponse;
+import hackatonkm.response.TestResponse;
 import services.DBConnectionService;
 import services.UtilService;
 
@@ -28,15 +31,22 @@ public class MainServlet extends HttpServlet {
     private DBConnectionService dbConnection;
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         PrintWriter out = response.getWriter();
-        String res = request.getParameter("krasi");
-        response.setContentType("text/html");
+        Gson gson = new Gson();
+        GeneralResponse rsp = null;
         
-        res += dbConnection.getExampleDataFromDB();
-        res += dbConnection.getExampleDataFromDB();
+        String cmd = request.getParameter("cmd");
         
-        out.print(utilService.appendGuice(res));
+        if(cmd.equals("Test")) {
+        	String test = request.getParameter("test");
+        	rsp = new TestResponse(test);
+        }
+        
+        //dbConnection.getExampleDataFromDB();
+
+        response.setContentType("json");
+        out.print(gson.toJson(rsp));
         out.flush();
     }
 }

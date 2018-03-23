@@ -10,27 +10,23 @@ public class DBConnectionService {
 
 	private Connection conn = null;
 
-	private Connection getConnection() {
-	    
-		if (conn == null) {
-			try {
-			    Class.forName("org.postgresql.Driver");
-				this.conn = DriverManager.getConnection(
-						"jdbc:postgresql://localhost:49971/uNzE4kBu9otGp4QJ",
-						"K231CHL2mVF0yYum", "l1yswwHrudHbMOo8");
-			} catch (SQLException | ClassNotFoundException e) {
-				System.out.println("Error connection to db " + e);
-			}
-		}
-		return conn;
+	
+	public DBConnectionService() {
+		try {
+			this.conn = DriverManager.getConnection(
+					"jdbc:postgres://K231CHL2mVF0yYum:l1yswwHrudHbMOo8@10.11.241.22:49971/uNzE4kBu9otGp4QJ",
+					"K231CHL2mVF0yYum", "l1yswwHrudHbMOo8");
+		} catch (SQLException e) {
+			System.out.println("Error connection to db " + e);
+		}		
 	}
+	
 
 	public String getExampleDataFromDB() {
 		String result = null;
-		Connection con = getConnection();
 		Statement st;
 		try {
-			st = con.createStatement();
+			st = conn.createStatement();
 
 			ResultSet rs = st.executeQuery("SELECT name FROM test WHERE id = 1");
 			while (rs.next()) {
