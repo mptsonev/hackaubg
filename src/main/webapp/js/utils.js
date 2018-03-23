@@ -16,9 +16,11 @@
 	
 	function initializeMe() {
 		myId = Math.floor(Math.random() * 100000);
-		peer = new Peer('"' + myId + '"');
-		console.log(myId);
+		peer = new Peer({ key: '"' + myId + '"'});
 		
+		peer.on('open', function(id) {
+		  console.log('My peer ID is: ' + id);
+		});
 		peer.on('call', function(call) {
 			navigator.mediaDevices.getUserMedia({video: {width: 320, height: 160, framerate: {max: 10}}, audio: true}).then(function(myStream){
 				call.answer(myStream);

@@ -5,7 +5,7 @@
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 		<script src="js/utils.js"></script>
-		<script src="http://cdn.peerjs.com/0.3/peer.js"></script>
+		<script src="js/peer.js"></script>
 		
 		<video id="myVideoObject" autoplay></video>
 		<video id="videoObject" autoplay></video>
