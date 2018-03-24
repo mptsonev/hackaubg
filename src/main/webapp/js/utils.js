@@ -85,7 +85,7 @@
 			
 			setInterval(function(){
 				$("#duration").text("Duration: " + msToTime(new Date() - classRoom.startTime));
-			}, 2500)
+			}, 500)
 		}, function(er){
 			alert("Error is: " + er)
 		});				
@@ -108,9 +108,24 @@
 	
 
 	function addVideoInDialog(id, stream) {
+		var dialogTitle = '';
+		if(sessionStorage.getItem('role') == "teacher") {
+			if(id == "my-video") {
+				dialogTitle = "Teacher";
+			} else {
+				dialogTitle = "Student";
+			}
+		} else {
+			if(id == "my-video") {
+				dialogTitle = "Student";
+			} else {
+				dialogTitle = "Teacher";
+			}			
+		}
+		
 		var newDiv = $(document.createElement('div')); 
 		newDiv.html('<video id="' + id + '" autoplay style="width:100%; height:100%;  overflow:hidden;"></video>');
-		newDiv.dialog({width: 440,height:320, open: function(){
+		newDiv.dialog({width: 440,height:320, title: dialogTitle, open: function(){
 			$(this).css('overflow', 'hidden')
 		}});
 		
@@ -142,7 +157,7 @@
 	  var mins = s % 60;
 	  var hrs = (s - mins) / 60;
 
-	  return pad(hrs) + ':' + pad(mins) + ':' + pad(secs) + '.' + pad(ms, 3);
+	  return pad(hrs) + ':' + pad(mins) + ':' + pad(secs);
 	}	
 	
 	
