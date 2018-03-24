@@ -23,23 +23,29 @@
 		});
 		peer.on('call', function(call) {
 			navigator.mediaDevices.getUserMedia({video: {width: 320, height: 160, framerate: {max: 10}}, audio: true}).then(function(myStream){
-				call.answer(myStream);
 				call.on('stream',function(remoteStream){
-					var partnerVideoTag = $('#videoObject')[0];
-					partnerVideoTag.srcObject = remoteStream;	
+					addVideoInDialog("xxxx", remoteStream);
 				})
 			})
 		})		
 	}
 	
+	function addVideoInDialog(id, stream) {
+		var newDiv = $(document.createElement('div')); 
+		newDiv.html('<video id="' + id + '" autoplay></video>');
+		newDiv.dialog({width: 325,height:171});
+		
+		var myVideoTag = $('#' + id)[0];
+		myVideoTag.srcObject = stream;		
+
+	}
+	
 	function callUser(remoteUserId) {
 		navigator.mediaDevices.getUserMedia({video: {width: 320, height: 160, framerate: {max: 10}}, audio: true}).then(function(myStream){
-			var myVideoTag = $('#myVideoObject')[0];
-			myVideoTag.srcObject = myStream;
+			addVideoInDialog(myId, myStream);
 			var call = peer.call(remoteUserId, myStream);
 			call.on('stream', function(remoteStream) {
-				var partnerVideoTag = $('#videoObject')[0];
-				partnerVideoTag.srcObject = remoteStream;				
+				addVideoInDialog(remoteUserId, remoteStream);
 			});
 		}, function(err) {
 			debugger;
