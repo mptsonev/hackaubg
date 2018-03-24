@@ -76,8 +76,9 @@
 		var getRooms = {};
 		getRooms.cmd = "getClassrooms";
 		
-		sendMessage(adminCreator,function(data){
+		sendMessage(getRooms,function(data){
 			var classRoom = data.classrooms[0];
+			debugger;
 			$("#containerImage").attr("src", classRoom.pictureUrl);
 			$("#containerTeacher").text(classRoom.teacherName);
 			$("#containerRoomNameSubject").text("Subject: " + classRoom.subject + " Room Name: " + classRoom.roomName);
@@ -90,15 +91,16 @@
 	
 	// Join room
 	function joinRoom() {
-		var roomData = JSON.parse(sessionStorage.setItem('joinedRoomData', JSON.stringify(adminCreator)));
+		var roomData = JSON.parse(sessionStorage.getItem('joinedRoomData'));
 		connectWebcamToUser(roomData.teacherWebcamId);
 		connectWhiteBoardRoom(roomData.whiteboardId);
 	}
 	
 	// Join button pressed
 	$("#allClassroomData").click(function(){
+		debugger;
 		var data = $(this).attr("data");
-		sessionStorage.setItem('joinedRoomData', JSON.stringify(adminCreator));
+		sessionStorage.setItem('joinedRoomData', JSON.stringify(data));
 		window.location.href = "/";
 	})
 	
