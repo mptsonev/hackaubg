@@ -1,7 +1,5 @@
 package models;
 
-import java.sql.Date;
-
 public class Classroom {
     private int roomId;
     private String roomName;
@@ -10,7 +8,7 @@ public class Classroom {
     private String whiteboardId;
     private String teacherWebcamId;
     private String pictureUrl;
-    private Date startTime;
+    private long startTime;
 
     public int getRoomId() {
         return roomId;
@@ -44,11 +42,11 @@ public class Classroom {
         this.teacherName = teacherName;
     }
 
-    public Date getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 

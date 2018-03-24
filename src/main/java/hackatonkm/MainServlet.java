@@ -79,7 +79,7 @@ public class MainServlet extends HttpServlet {
                 String teacherName = request.getParameter("userName");
                 String whiteboardId = request.getParameter("whiteboardId");
                 String pictureUrl = request.getParameter("pictureURL");
-                Date timestamp = new Date(Calendar.getInstance().getTime().getTime());
+                long timestamp = System.currentTimeMillis();
                 classroom.setRoomName(roomName);
                 classroom.setSubject(subject);
                 classroom.setTeacherName(teacherName);

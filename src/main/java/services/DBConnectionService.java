@@ -97,7 +97,7 @@ public class DBConnectionService {
         try {
             st = conn.createStatement();
             st.executeUpdate(MessageFormat.format(
-                "INSERT INTO CLASSROOM VALUES (DEFAULT, ''{0}'', ''{1}'', ''{2}'', ''{3}'', ''{4}'', ''{5}'', ''{6}'', ''{7}'')",
+                "INSERT INTO CLASSROOM VALUES (DEFAULT, ''{0}'', ''{1}'', ''{2}'', ''{3}'', ''{4}'', ''{5}'', ''{6,number,#}'')",
                 classroom.getRoomName(), classroom.getSubject(), classroom.getTeacherName(), classroom.getWhiteboardId(),
                 classroom.getTeacherWebcamId(), classroom.getPictureUrl(), classroom.getStartTime()));
         } catch (SQLException e) {
@@ -123,7 +123,8 @@ public class DBConnectionService {
         classroom.setTeacherName(rs.getString(4));
         classroom.setWhiteboardId(rs.getString(5));
         classroom.setTeacherWebcamId(rs.getString(6));
-        classroom.setStartTime(rs.getDate(7));
+        classroom.setPictureUrl(rs.getString(7));
+        classroom.setStartTime(rs.getLong(8));
         return classroom;
     }
 }
