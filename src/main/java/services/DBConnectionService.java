@@ -97,9 +97,9 @@ public class DBConnectionService {
         try {
             st = conn.createStatement();
             st.executeUpdate(MessageFormat.format(
-                "INSERT INTO CLASSROOM VALUES (DEFAULT, ''{0}'', ''{1}'', ''{2}'', ''{3}'', ''{4}'', ''{5}'', ''{6}'')",
+                "INSERT INTO CLASSROOM VALUES (DEFAULT, ''{0}'', ''{1}'', ''{2}'', ''{3}'', ''{4}'', ''{5}'', ''{6}'', ''{7}'')",
                 classroom.getRoomName(), classroom.getSubject(), classroom.getTeacherName(), classroom.getWhiteboardId(),
-                classroom.getTeacherWebcamId(), classroom.getStartTime()));
+                classroom.getTeacherWebcamId(), classroom.getPictureUrl(), classroom.getStartTime()));
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,8 +1,9 @@
 package hackatonkm;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -71,9 +72,21 @@ public class MainServlet extends HttpServlet {
                 return new TestResponse("User " + userName + " created");
             }
             case "createClassroom": {
-                BufferedReader reader = request.getReader();
-                Gson gson = new Gson();
-                Classroom classroom = gson.fromJson(reader, Classroom.class);
+                Classroom classroom = new Classroom();
+                String roomName = request.getParameter("roomName");
+                String subject = request.getParameter("subject");
+                String teacherVideoId = request.getParameter("teacherVideoId");
+                String teacherName = request.getParameter("userName");
+                String whiteboardId = request.getParameter("whiteboardId");
+                String pictureUrl = request.getParameter("pictureURL");
+                Date timestamp = new Date(Calendar.getInstance().getTime().getTime());
+                classroom.setRoomName(roomName);
+                classroom.setSubject(subject);
+                classroom.setTeacherName(teacherName);
+                classroom.setTeacherWebcamId(teacherVideoId);
+                classroom.setWhiteboardId(whiteboardId);
+                classroom.setPictureUrl(pictureUrl);
+                classroom.setStartTime(timestamp);
                 dbConnection.addClassroom(classroom);
                 return new TestResponse("Classroom created");
             }

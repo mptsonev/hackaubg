@@ -9,6 +9,7 @@ public class Classroom {
     private String teacherName;
     private String whiteboardId;
     private String teacherWebcamId;
+    private String pictureUrl;
     private Date startTime;
 
     public int getRoomId() {
@@ -65,5 +66,13 @@ public class Classroom {
 
     public void setTeacherWebcamId(String teacherWebcamId) {
         this.teacherWebcamId = teacherWebcamId;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 }
