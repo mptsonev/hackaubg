@@ -15,7 +15,7 @@
 	var myId = null;
 	
 	function initializeMe() {
-		peer = new Peer({ host : 'asphericpeerjs.herokuapp.com' });
+		peer = new Peer({host:'peerjs-server.herokuapp.com', secure:true, port:443, key: 'peerjs', debug: 3});
 		
 		peer.on('open', function(id) {
 		  myId = id;
