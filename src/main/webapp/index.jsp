@@ -2,10 +2,26 @@
 <head>
   <title>PeerJS - Video chat example</title>
   <link rel="stylesheet" href="js/style.css">
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>	
   <script type="text/javascript" src="js/peer.js"></script>
+  <script type="text/javascript" src="js/utils.js"></script>
+  
+  <jsp:include page="pages/whiteboard.jsp" />
+  
+  
   <script>
 
+//both links are mandatory
+//widget.html will internally use widget.js
+
+
+</script>
+
+<!-- 3rd i.e. last step -->
+<script>
+  
     // Compatibility shim
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
@@ -54,9 +70,9 @@
 
     function step1 () {
       // Get audio/video stream
-      navigator.getUserMedia({audio: true, video: true}, function(stream){
+      navigator.getUserMedia({audio: true, video: {width:640, height: 480} }, function(stream){
         // Set your video displays
-        $('#my-video').prop('src', URL.createObjectURL(stream));
+        addVideoInDialog("my-video", stream);
 
         window.localStream = stream;
         step2();
@@ -76,7 +92,7 @@
 
       // Wait for stream on the call, then set peer video display
       call.on('stream', function(stream){
-        $('#their-video').prop('src', URL.createObjectURL(stream));
+    	addVideoInDialog("their-video", stream);
       });
 
       // UI stuff
@@ -94,13 +110,7 @@
 
 <body>
 
-  <div class="pure-g">
-
-      <!-- Video area -->
-      <div class="pure-u-2-3" id="video-container">
-        <video id="their-video" autoplay></video>
-        <video id="my-video" muted="true" autoplay></video>
-      </div>
+  <div class="pure-g" style="position:relative">
 
       <!-- Steps -->
       <div class="pure-u-1-3">
