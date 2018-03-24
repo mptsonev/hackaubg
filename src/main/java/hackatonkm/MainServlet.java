@@ -2,6 +2,7 @@ package hackatonkm;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,7 @@ import com.google.inject.Singleton;
 
 import hackatonkm.response.GeneralResponse;
 import hackatonkm.response.TestResponse;
+import models.User;
 import services.DBConnectionService;
 import services.UtilService;
 
@@ -34,19 +36,19 @@ public class MainServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         PrintWriter out = response.getWriter();
         Gson gson = new Gson();
-        GeneralResponse rsp = null;
-        
-        String cmd = request.getParameter("cmd");
-        
-        if(cmd.equals("Test")) {
-        	String test = request.getParameter("test");
-        	rsp = new TestResponse(test);
-        }
-        
-        //dbConnection.getExampleDataFromDB();
+//        GeneralResponse rsp = null;
+//        
+//        String cmd = request.getParameter("cmd");
+//        
+//        if(cmd.equals("Test")) {
+//        	String test = request.getParameter("test");
+//        	rsp = new TestResponse(test);
+//        }
+//        
+        List<User> users = dbConnection.getUsers();
 
         response.setContentType("json");
-        out.print(gson.toJson(rsp));
+        out.print(gson.toJson(users));
         out.flush();
     }
 }
