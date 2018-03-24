@@ -26,7 +26,7 @@
 				sessionStorage.setItem('role', "student");
 				window.location.href = "/ui/list-rooms.html"
 			} else if(login.role == "teacher") {
-				sessionStorage.setItem('adminCreator', "teacher");
+				sessionStorage.setItem('role', "teacher");
 				window.location.href = "/ui/create-room.html";
 			}
 		}, function(er){
