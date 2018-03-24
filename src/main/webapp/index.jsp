@@ -32,8 +32,6 @@
       $('#my-id').text(peer.id);
       if(sessionStorage.getItem('role') == "teacher") {
 	      createRoomRequest(peer.id);
-      } else {
-    	  joinRoom();
       }
     });
 
@@ -82,8 +80,12 @@
       navigator.getUserMedia({audio: true, video: {width:640, height: 480} }, function(stream){
         // Set your video displays
         addVideoInDialog("my-video", stream);
-
         window.localStream = stream;
+
+        if(sessionStorage.getItem('role') == "student") {
+      	  joinRoom();
+        }        
+        
         step2();
       }, function(){ $('#step1-error').show(); });
     }

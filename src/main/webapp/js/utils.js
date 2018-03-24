@@ -91,6 +91,7 @@
 	// Join room
 	function joinRoom() {
 		var roomData = JSON.parse(sessionStorage.getItem('joinedRoomData'));
+		roomData = JSON.parse(roomData);
 		connectWebcamToUser(roomData.teacherWebcamId);
 		connectWhiteBoardRoom(roomData.whiteboardId);
 	}
