@@ -250,7 +250,7 @@ div#comments-popup {
     ctrl+mousedown (to copy/paste all shapes)
 </div>
 
-<div class="extra-controls">
+<div class="extra-controls" hidden>
     <button id="export-as-image">Export as Image</button>
     <button id="btn-display-undo-popup">Undo</button>
 </div>

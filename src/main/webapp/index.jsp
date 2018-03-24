@@ -45,14 +45,18 @@
       step2();
     });
 
+    function connectWebcamToUser(webcamid) {
+        var call = peer.call(webcamid, window.localStream);
+        step3(call);
+    }
+    
     // Click handlers setup
     $(function(){
-      $('#make-call').click(function(){
-        // Initiate a call!
-        var call = peer.call($('#callto-id').val(), window.localStream);
-
-        step3(call);
-      });
+//      $('#make-call').click(function(){
+//        // Initiate a call!
+//        var call = peer.call($('#callto-id').val(), window.localStream);
+//        step3(call);
+//      });
 
       $('#end-call').click(function(){
         window.existingCall.close();
@@ -111,7 +115,7 @@
 
 <body>
 
-  <div class="pure-g" style="position:relative">
+  <div class="pure-g" style="position:relative" hidden>
 
       <!-- Steps -->
       <div class="pure-u-1-3">

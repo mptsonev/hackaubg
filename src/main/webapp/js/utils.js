@@ -11,7 +11,6 @@
 			});
 	}
 
-	var userName = null;
 	// Registration
 	function register() {
 		var login = {};
@@ -19,8 +18,8 @@
 		login.userName = $("#userName").val();
 		login.password = $("#password").val();
 		login.role = $("#role").val();
-		
-		userName = login.userName;
+
+		sessionStorage.setItem('userName', login.userName);
 		
 		sendMessage(login,function(data){
 			alert("Successfully registered");
@@ -51,12 +50,15 @@
 	
 	function createRoomRequest(teacherVideoId) {
 		var adminCreator = sessionStorage.getItem('adminCreator');
+		adminCreator = JSON.parse(adminCreator);
 		adminCreator.cmd = "createClassroom";
 		adminCreator.teacherVideoId = teacherVideoId;
 		adminCreator.whiteboardId = makeid();
+		adminCreator.userName = sessionStorage.getItem('userName');
 		
 		openWhiteBoardRoom(adminCreator.whiteboardId);
 		
+		debugger;
 		sendMessage(adminCreator,function(data){
 			alert("Successfully registered");
 		}, function(er){
