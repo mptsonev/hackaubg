@@ -11,7 +11,7 @@
 			});
 	}
 
-	
+	var userName = null;
 	// Registration
 	function register() {
 		var login = {};
@@ -20,8 +20,15 @@
 		login.password = $("#password").val();
 		login.role = $("#role").val();
 		
+		userName = login.userName;
+		
 		sendMessage(login,function(data){
-			alert("Successfully registered")
+			alert("Successfully registered");
+			if(login.role == "student") {
+				
+			} else if(login.role == "teacher") {
+				window.location.href = "/ui/create-room.html";
+			}
 		}, function(er){
 			alert("Error is: " + er)
 		});
@@ -30,6 +37,37 @@
 	$("#login").click(function(){
 		register();
 	})
+	
+	// Create Room
+	function createRoom() {
+		var adminCreator = {};
+		adminCreator.roomName = $("#roomName").val();
+		adminCreator.pictureURL = $("#pictureURL").val();
+		adminCreator.subject = $("#subject").val();
+		adminCreator.userName = userName;
+		sessionStorage.setItem('adminCreator', JSON.stringify(adminCreator));
+		window.location.href = "/";
+	}
+	
+	function createRoomRequest(teacherVideoId) {
+		var adminCreator = sessionStorage.getItem('adminCreator');
+		adminCreator.cmd = "createClassroom";
+		adminCreator.teacherVideoId = teacherVideoId;
+		adminCreator.whiteboardId = makeid();
+		
+		openWhiteBoardRoom(adminCreator.whiteboardId);
+		
+		sendMessage(adminCreator,function(data){
+			alert("Successfully registered");
+		}, function(er){
+			alert("Error is: " + er)
+		});				
+	}
+	
+	$("#createRoom").click(function(){
+		createRoom();
+	})
+	
 
 	function addVideoInDialog(id, stream) {
 		var newDiv = $(document.createElement('div')); 
@@ -40,7 +78,16 @@
 		
 		var myVideoTag = $('#' + id)[0];
 		myVideoTag.srcObject = stream;		
-
 	}
+	
+	function makeid() {
+	  var text = "";
+	  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+	  for (var i = 0; i < 5; i++)
+	    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+	  return text;
+	}	
 	
 	

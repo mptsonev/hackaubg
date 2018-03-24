@@ -30,6 +30,7 @@
 
     peer.on('open', function(){
       $('#my-id').text(peer.id);
+      createRoomRequest(peer.id);
     });
 
     // Receiving a call
