@@ -528,9 +528,14 @@ connection.sdpConstraints.mandatory = {
     OfferToReceiveVideo: true
 };
 connection.dontCaptureUserMedia = true;
-if (location.hash.replace('#', '').length) {
-    var roomid = location.hash.replace('#', '');
-    connection.join(roomid);
+//if (location.hash.replace('#', '').length) {
+//    var roomid = location.hash.replace('#', '');
+//    connection.join(roomid);
+//}
+
+
+function connectWhiteBoardRoom(roomid) {
+	connection.join(roomid);
 }
 
 connection.onUserStatusChanged = function(event) {
