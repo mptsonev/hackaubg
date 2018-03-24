@@ -4,9 +4,11 @@ import java.sql.Date;
 
 public class Classroom {
     private int roomId;
-    private String roomTitle;
+    private String roomName;
     private String subject;
-    private int teacherId;
+    private String teacherName;
+    private String whiteboardId;
+    private String teacherWebcamId;
     private Date startTime;
 
     public int getRoomId() {
@@ -17,12 +19,12 @@ public class Classroom {
         this.roomId = roomId;
     }
 
-    public String getRoomTitle() {
-        return roomTitle;
+    public String getRoomName() {
+        return roomName;
     }
 
-    public void setRoomTitle(String roomTitle) {
-        this.roomTitle = roomTitle;
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
     public String getSubject() {
@@ -33,12 +35,12 @@ public class Classroom {
         this.subject = subject;
     }
 
-    public int getTeacherId() {
-        return teacherId;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setTeacherId(int teacherId) {
-        this.teacherId = teacherId;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     public Date getStartTime() {
@@ -49,4 +51,19 @@ public class Classroom {
         this.startTime = startTime;
     }
 
+    public String getWhiteboardId() {
+        return whiteboardId;
+    }
+
+    public void setWhiteboardId(String whiteboardId) {
+        this.whiteboardId = whiteboardId;
+    }
+
+    public String getTeacherWebcamId() {
+        return teacherWebcamId;
+    }
+
+    public void setTeacherWebcamId(String teacherWebcamId) {
+        this.teacherWebcamId = teacherWebcamId;
+    }
 }
