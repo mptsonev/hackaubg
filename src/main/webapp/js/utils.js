@@ -15,7 +15,7 @@
 	var myId = null;
 	
 	function initializeMe() {
-		peer = new Peer({ key: 'lwjd5qra8257b9'});
+		peer = new Peer({ host : 'asphericpeerjs.herokuapp.com' });
 		
 		peer.on('open', function(id) {
 		  myId = id;
@@ -25,7 +25,8 @@
 			navigator.mediaDevices.getUserMedia({video: {width: 320, height: 160, framerate: {max: 10}}, audio: true}).then(function(myStream){
 				call.answer(myStream);
 				call.on('stream',function(remoteStream){
-					debugger;
+					var partnerVideoTag = $('#videoObject')[0];
+					partnerVideoTag.srcObject = remoteStream;	
 				})
 			})
 		})		
