@@ -30,7 +30,11 @@
 
     peer.on('open', function(){
       $('#my-id').text(peer.id);
-      createRoomRequest(peer.id);
+      if(sessionStorage.getItem('role') == "teacher") {
+	      createRoomRequest(peer.id);
+      } else {
+    	  joinRoom();
+      }
     });
 
     // Receiving a call

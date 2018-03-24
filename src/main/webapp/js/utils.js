@@ -23,8 +23,10 @@
 		
 		sendMessage(login,function(data){
 			if(login.role == "student") {
-				
+				sessionStorage.setItem('role', "student");
+				window.location.href = "/ui/list-rooms.html"
 			} else if(login.role == "teacher") {
+				sessionStorage.setItem('adminCreator', "teacher");
 				window.location.href = "/ui/create-room.html";
 			}
 		}, function(er){
@@ -69,6 +71,37 @@
 		createRoom();
 	})
 	
+	// Get rooms
+	function getAllRooms() {
+		var getRooms = {};
+		getRooms.cmd = "getClassrooms";
+		
+		sendMessage(adminCreator,function(data){
+			var classRoom = data.classrooms[0];
+			$("#containerImage").attr("src", classRoom.pictureUrl);
+			$("#containerTeacher").text(classRoom.teacherName);
+			$("#containerRoomNameSubject").text("Subject: " + classRoom.subject + " Room Name: " + classRoom.roomName);
+			$("#duration").text(new Date() - classRoom.startTime);
+			$("#joinClassroom").attr("data", JSON.stringify(classRoom));
+		}, function(er){
+			alert("Error is: " + er)
+		});				
+	}
+	
+	// Join room
+	function joinRoom() {
+		var roomData = JSON.parse(sessionStorage.setItem('joinedRoomData', JSON.stringify(adminCreator)));
+		connectWebcamToUser(roomData.teacherWebcamId);
+		connectWhiteBoardRoom(roomData.whiteboardId);
+	}
+	
+	// Join button pressed
+	$("#allClassroomData").click(function(){
+		var data = $(this).attr("data");
+		sessionStorage.setItem('joinedRoomData', JSON.stringify(adminCreator));
+		window.location.href = "/";
+	})
+	
 
 	function addVideoInDialog(id, stream) {
 		var newDiv = $(document.createElement('div')); 
@@ -85,7 +118,7 @@
 	  var text = "";
 	  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-	  for (var i = 0; i < 5; i++)
+	  for (var i = 0; i < 8; i++)
 	    text += possible.charAt(Math.floor(Math.random() * possible.length));
 
 	  return text;
