@@ -59,7 +59,6 @@
 		
 		openWhiteBoardRoom(adminCreator.whiteboardId);
 		
-		debugger;
 		sendMessage(adminCreator,function(data){
 		}, function(er){
 			alert("Error is: " + er)
@@ -77,12 +76,16 @@
 		
 		sendMessage(getRooms,function(data){
 			var classRoom = data.classrooms[data.classrooms.length - 1];
-			debugger;
 			$("#containerImage").attr("src", classRoom.pictureUrl);
 			$("#containerTeacher").text("Teacher Name: " + classRoom.teacherName);
-			$("#containerRoomNameSubject").text("Subject: " + classRoom.subject + " Room Name: " + classRoom.roomName);
-			$("#duration").text(new Date() - classRoom.startTime);
+			$("#containerRoomSubject").text("Subject: " + classRoom.subject);
+			$("#containerRoomName").text("Room Name: " + classRoom.roomName);
+			$("#duration").text("Duration: " + msToTime(new Date() - classRoom.startTime));
 			$("#allClassroomData").attr("data", JSON.stringify(classRoom));
+			
+			setInterval(function(){
+				$("#duration").text("Duration: " + msToTime(new Date() - classRoom.startTime));
+			}, 2500)
 		}, function(er){
 			alert("Error is: " + er)
 		});				
@@ -98,7 +101,6 @@
 	
 	// Join button pressed
 	$("#allClassroomData").click(function(){
-		debugger;
 		var data = $(this).attr("data");
 		sessionStorage.setItem('joinedRoomData', JSON.stringify(data));
 		window.location.href = "/";
@@ -124,6 +126,23 @@
 	    text += possible.charAt(Math.floor(Math.random() * possible.length));
 
 	  return text;
+	}	
+	
+	function msToTime(s) {
+	  // Pad to 2 or 3 digits, default is 2
+	  function pad(n, z) {
+	    z = z || 2;
+	    return ('00' + n).slice(-z);
+	  }
+
+	  var ms = s % 1000;
+	  s = (s - ms) / 1000;
+	  var secs = s % 60;
+	  s = (s - secs) / 60;
+	  var mins = s % 60;
+	  var hrs = (s - mins) / 60;
+
+	  return pad(hrs) + ':' + pad(mins) + ':' + pad(secs) + '.' + pad(ms, 3);
 	}	
 	
 	
