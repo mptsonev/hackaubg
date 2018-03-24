@@ -3,7 +3,7 @@
 	function sendMessage(data, success, ecb) {
 		$.ajax({
 			  type: "POST",
-			  url: "services",
+			  url: "/services",
 			  data: data,
 			  success: success,
 			  error: ecb,
