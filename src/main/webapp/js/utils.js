@@ -61,7 +61,6 @@
 		
 		debugger;
 		sendMessage(adminCreator,function(data){
-			alert("Successfully registered");
 		}, function(er){
 			alert("Error is: " + er)
 		});				
@@ -77,13 +76,13 @@
 		getRooms.cmd = "getClassrooms";
 		
 		sendMessage(getRooms,function(data){
-			var classRoom = data.classrooms[0];
+			var classRoom = data.classrooms[data.classrooms.length - 1];
 			debugger;
 			$("#containerImage").attr("src", classRoom.pictureUrl);
-			$("#containerTeacher").text(classRoom.teacherName);
+			$("#containerTeacher").text("Teacher Name: " + classRoom.teacherName);
 			$("#containerRoomNameSubject").text("Subject: " + classRoom.subject + " Room Name: " + classRoom.roomName);
 			$("#duration").text(new Date() - classRoom.startTime);
-			$("#joinClassroom").attr("data", JSON.stringify(classRoom));
+			$("#allClassroomData").attr("data", JSON.stringify(classRoom));
 		}, function(er){
 			alert("Error is: " + er)
 		});				
