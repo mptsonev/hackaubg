@@ -22,7 +22,6 @@
 		sessionStorage.setItem('userName', login.userName);
 		
 		sendMessage(login,function(data){
-			alert("Successfully registered");
 			if(login.role == "student") {
 				
 			} else if(login.role == "teacher") {
@@ -43,7 +42,7 @@
 		adminCreator.roomName = $("#roomName").val();
 		adminCreator.pictureURL = $("#pictureURL").val();
 		adminCreator.subject = $("#subject").val();
-		adminCreator.userName = userName;
+		adminCreator.userName = sessionStorage.getItem('userName');
 		sessionStorage.setItem('adminCreator', JSON.stringify(adminCreator));
 		window.location.href = "/";
 	}

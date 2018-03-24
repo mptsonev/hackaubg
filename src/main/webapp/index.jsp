@@ -114,14 +114,12 @@
 </head>
 
 <body>
-
+<!--  
   <div class="pure-g" style="position:relative" hidden>
 
-      <!-- Steps -->
       <div class="pure-u-1-3">
         <h2>PeerJS Video Chat</h2>
 
-        <!-- Get local audio/video stream -->
         <div id="step1">
           <p>Please click `allow` on the top of the screen so we can access your webcam and microphone for calls.</p>
           <div id="step1-error">
@@ -130,7 +128,6 @@
           </div>
         </div>
 
-        <!-- Make calls to others -->
         <div id="step2">
           <p>Your id: <span id="my-id">...</span></p>
           <p>Share this id with others so they can call you.</p>
@@ -141,13 +138,13 @@
           </div>
         </div>
 
-        <!-- Call in progress -->
         <div id="step3">
           <p>Currently in call with <span id="their-id">...</span></p>
           <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
         </div>
       </div>
   </div>
+  -->
 
 
 </body>
